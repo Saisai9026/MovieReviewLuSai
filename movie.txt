@@ -33,12 +33,5 @@
       "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
     ],
     "d": "အချစ်ဇာတ်လမ်း"
-  },
-{
-    "t": "New Sample",
-    "imgs": [
-      "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg"
-    ],
-    "d": "အချစ်ဇာတ်လမ်း"
   }
 ]
