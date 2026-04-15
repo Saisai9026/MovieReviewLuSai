@@ -51,6 +51,11 @@ const movies = [
     imgs: ["https://image.tmdb.org/t/p/w500/mbPrrbt8bSLcHSBCHnRclPlMZPl.jpg"],
     d: "အေးမြသော အင်အားရှိသော မင်းသမီး Elsa နှင့် သူမ၏ညီမ Anna တို့၏ ချစ်ခြင်းနှင့် မိသားစုဆက်ဆံရေးကို ပြသထားသော ဇာတ်ကားဖြစ်ပါတယ်။"
   },
+  {
+    t: "Sample Title",
+    imgs: ["https://image.tmdb.org/t/p/w500/mbPrrbt8bSLcHSBCHnRclPlMZPl.jpg"],
+    d: "အေးမြသော အင်အားရှိသော မင်းသမီး Elsa နှင့် သူမ၏ညီမ Anna တို့၏ ချစ်ခြင်းနှင့် မိသားစုဆက်ဆံရေးကို ပြသထားသော ဇာတ်ကားဖြစ်ပါတယ်။"
+  },
 
   // You can duplicate pattern to reach 30
 ];
