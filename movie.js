@@ -53,7 +53,7 @@ const movies = [
   },
   {
     t: "Sample Title",
-    imgs: ["https://image.tmdb.org/t/p/w500/mbPrrbt8bSLcHSBCHnRclPlMZPl.jpg"],
+    imgs: ["https://image.tmdb.org/t/p/w500/mbPrrbt8bSLcHSBCHnRclPlMZPl.jpg" , "https://m.media-amazon.com/images/I/615WT5rYINL._AC_UF894,1000_QL80_.jpg"],
     d: "အေးမြသော အင်အားရှိသော မင်းသမီး Elsa နှင့် သူမ၏ညီမ Anna တို့၏ ချစ်ခြင်းနှင့် မိသားစုဆက်ဆံရေးကို ပြသထားသော ဇာတ်ကားဖြစ်ပါတယ်။"
   },
 
