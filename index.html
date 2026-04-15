@@ -29,42 +29,58 @@ header{
 
 body{ padding-top:65px; }
 
-/* ================= HERO (DESKTOP 21:9) ================= */
+/* ================= HERO (SMOOTH CORE) ================= */
 .hero{
   position:relative;
   width:100%;
   aspect-ratio:21/9;
   overflow:hidden;
+  background:#000;
 }
 
+/* 🔥 SMOOTH IMAGE TRANSITION */
 .hero img{
   width:100%;
   height:100%;
   object-fit:cover;
+
+  opacity:1;
+  transform:scale(1.02);
+
+  transition:
+    opacity 0.6s ease,
+    transform 6s ease;
 }
 
-/* TEXT */
+/* fade animation class */
+.fade-out{
+  opacity:0;
+}
+
+/* HERO TEXT */
 .hero-content{
   position:absolute;
   left:60px;
   bottom:80px;
+  z-index:2;
 }
 
 .hero-content h1{
   color:white;
   font-size:42px;
+  margin:0;
 }
 
 .hero-content p{
-  background:rgba(0,0,0,0.4);
-  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.45);
+  backdrop-filter:blur(12px);
   padding:12px;
   border-radius:12px;
   color:white;
   max-width:420px;
 }
 
-/* ================= ARROWS ================= */
+/* ARROWS */
 .arrow{
   position:absolute;
   top:50%;
@@ -75,41 +91,20 @@ body{ padding-top:65px; }
   border:none;
   cursor:pointer;
   font-size:22px;
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.5);
   color:white;
   z-index:10;
+
+  transition:0.25s ease;
+}
+
+.arrow:hover{
+  background:#DA4848;
+  transform:translateY(-50%) scale(1.1);
 }
 
 .left{ left:15px; }
 .right{ right:15px; }
-
-/* ================= MOBILE 2:3 FIX ================= */
-@media (max-width:768px){
-
-  .hero{
-    aspect-ratio:2/3;   /* 🔥 MOBILE PORTRAIT */
-  }
-
-  .hero-content{
-    left:15px;
-    bottom:20px;
-  }
-
-  .hero-content h1{
-    font-size:20px;
-  }
-
-  .hero-content p{
-    font-size:12px;
-    max-width:90%;
-  }
-
-  .arrow{
-    width:45px;
-    height:45px;
-    font-size:18px;
-  }
-}
 
 /* ================= TRENDING ================= */
 .section{
@@ -121,7 +116,7 @@ body{ padding-top:65px; }
   column-gap:30px;
 }
 
-/* GLASS CARD */
+/* 🔥 SMOOTH GLASS CARD */
 .card{
   display:inline-block;
   width:100%;
@@ -129,13 +124,24 @@ body{ padding-top:65px; }
 
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(18px);
-  border-radius:16px;
+  -webkit-backdrop-filter:blur(18px);
 
+  border-radius:16px;
   overflow:hidden;
+
+  transform:translateZ(0);
+  will-change:transform;
+
+  transition:0.25s ease;
+}
+
+.card:hover{
+  transform:scale(1.04);
 }
 
 .card img{
   width:100%;
+  display:block;
 }
 
 .card-body{
@@ -143,8 +149,8 @@ body{ padding-top:65px; }
 }
 
 .card-body h4{
-  color:#DA4848;
   margin:0;
+  color:#DA4848;
 }
 
 .card-body p{
@@ -152,10 +158,26 @@ body{ padding-top:65px; }
   opacity:0.9;
 }
 
-/* RESPONSIVE GRID */
+/* RESPONSIVE */
 @media(max-width:1200px){ .stagger{column-count:3;} }
 @media(max-width:800px){ .stagger{column-count:2;} }
 @media(max-width:500px){ .stagger{column-count:1;} }
+
+/* MOBILE BANNER */
+@media (max-width:768px){
+  .hero{
+    aspect-ratio:2/3;
+  }
+
+  .hero-content h1{
+    font-size:20px;
+  }
+
+  .hero-content p{
+    font-size:12px;
+    max-width:90%;
+  }
+}
 
 </style>
 </head>
@@ -166,7 +188,6 @@ body{ padding-top:65px; }
   <h1>LU SAI STUDIO</h1>
 </header>
 
-<!-- HERO -->
 <div class="hero">
 
   <button class="arrow left" onclick="prevSlide()">❮</button>
@@ -181,7 +202,6 @@ body{ padding-top:65px; }
 
 </div>
 
-<!-- TRENDING -->
 <div class="section">
   <h2>🔥 Trending Now</h2>
   <div class="stagger" id="row"></div>
@@ -193,25 +213,57 @@ body{ padding-top:65px; }
 <script>
 
 let index = 0;
+let timer;
 
-function loadSlide(i){
-  const b = banners[i];
-
-  heroImg.src = b.image;
-  heroTitle.innerText = b.title;
-  heroDesc.innerText = b.desc;
-
-  index = i;
+/* PRELOAD IMAGE */
+function preload(src){
+  const img = new Image();
+  img.src = src;
 }
 
+/* SMOOTH SLIDE */
+function loadSlide(i){
+  const hero = document.getElementById("heroImg");
+
+  hero.classList.add("fade-out");
+
+  setTimeout(()=>{
+    const b = banners[i];
+
+    preload(banners[(i+1)%banners.length].image);
+
+    hero.src = b.image;
+    heroTitle.innerText = b.title;
+    heroDesc.innerText = b.desc;
+
+    hero.classList.remove("fade-out");
+
+    index = i;
+  },300);
+}
+
+/* NAVIGATION */
 function nextSlide(){
   loadSlide((index + 1) % banners.length);
+  resetAuto();
 }
 
 function prevSlide(){
   loadSlide((index - 1 + banners.length) % banners.length);
+  resetAuto();
 }
 
+/* AUTO */
+function startAuto(){
+  timer = setInterval(nextSlide, 5000);
+}
+
+function resetAuto(){
+  clearInterval(timer);
+  startAuto();
+}
+
+/* TRENDING */
 function renderMovies(list){
   const row = document.getElementById("row");
   row.innerHTML = "";
@@ -229,9 +281,11 @@ function renderMovies(list){
   });
 }
 
+/* INIT */
 window.onload = function(){
   loadSlide(0);
   renderMovies(movies);
+  startAuto();
 };
 
 </script>
