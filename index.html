@@ -11,7 +11,6 @@ body{
   margin:0;
   font-family:Segoe UI, Arial, sans-serif;
   background:#FFFDEB;
-  color:#1f2937;
 }
 
 /* HEADER */
@@ -30,7 +29,7 @@ header{
 
 body{ padding-top:65px; }
 
-/* HERO */
+/* ================= HERO (DESKTOP 21:9) ================= */
 .hero{
   position:relative;
   width:100%;
@@ -44,31 +43,28 @@ body{ padding-top:65px; }
   object-fit:cover;
 }
 
-/* HERO TEXT */
+/* TEXT */
 .hero-content{
   position:absolute;
   left:60px;
   bottom:80px;
-  z-index:2;
 }
 
 .hero-content h1{
   color:white;
   font-size:42px;
-  margin:0;
 }
 
 .hero-content p{
-  background:rgba(0,0,0,0.35);
+  background:rgba(0,0,0,0.4);
   backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
   padding:12px;
   border-radius:12px;
   color:white;
   max-width:420px;
 }
 
-/* ARROWS */
+/* ================= ARROWS ================= */
 .arrow{
   position:absolute;
   top:50%;
@@ -82,78 +78,81 @@ body{ padding-top:65px; }
   background:rgba(0,0,0,0.4);
   color:white;
   z-index:10;
-  transition:0.3s;
-}
-
-.arrow:hover{
-  background:rgba(218,72,72,0.9);
 }
 
 .left{ left:15px; }
 .right{ right:15px; }
 
-/* SECTION */
+/* ================= MOBILE 2:3 FIX ================= */
+@media (max-width:768px){
+
+  .hero{
+    aspect-ratio:2/3;   /* 🔥 MOBILE PORTRAIT */
+  }
+
+  .hero-content{
+    left:15px;
+    bottom:20px;
+  }
+
+  .hero-content h1{
+    font-size:20px;
+  }
+
+  .hero-content p{
+    font-size:12px;
+    max-width:90%;
+  }
+
+  .arrow{
+    width:45px;
+    height:45px;
+    font-size:18px;
+  }
+}
+
+/* ================= TRENDING ================= */
 .section{
   padding:40px;
 }
 
-/* GRID */
 .stagger{
   column-count:4;
   column-gap:30px;
 }
 
-/* ================= TRUE GLASS CARD ================= */
+/* GLASS CARD */
 .card{
   display:inline-block;
   width:100%;
   margin-bottom:30px;
 
-  /* 🔥 TRUE GLASS */
-  background:rgba(255,255,255,0.08);   /* almost transparent */
+  background:rgba(255,255,255,0.08);
   backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
-  border:1px solid rgba(255,255,255,0.15);
-
   border-radius:16px;
+
   overflow:hidden;
-  break-inside:avoid;
-
-  transition:0.3s;
-  cursor:pointer;
 }
 
-.card:hover{
-  transform:scale(1.03);
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.25);
-}
-
-/* IMAGE */
 .card img{
   width:100%;
-  display:block;
 }
 
-/* TEXT */
 .card-body{
   padding:12px;
 }
 
 .card-body h4{
-  margin:0;
   color:#DA4848;
+  margin:0;
 }
 
 .card-body p{
   font-size:13px;
-  line-height:1.5;
   opacity:0.9;
-  color:#222;
 }
 
-/* RESPONSIVE */
+/* RESPONSIVE GRID */
 @media(max-width:1200px){ .stagger{column-count:3;} }
 @media(max-width:800px){ .stagger{column-count:2;} }
 @media(max-width:500px){ .stagger{column-count:1;} }
@@ -195,7 +194,6 @@ body{ padding-top:65px; }
 
 let index = 0;
 
-/* HERO */
 function loadSlide(i){
   const b = banners[i];
 
@@ -206,7 +204,6 @@ function loadSlide(i){
   index = i;
 }
 
-/* ARROWS */
 function nextSlide(){
   loadSlide((index + 1) % banners.length);
 }
@@ -215,7 +212,6 @@ function prevSlide(){
   loadSlide((index - 1 + banners.length) % banners.length);
 }
 
-/* TRENDING */
 function renderMovies(list){
   const row = document.getElementById("row");
   row.innerHTML = "";
@@ -233,7 +229,6 @@ function renderMovies(list){
   });
 }
 
-/* INIT */
 window.onload = function(){
   loadSlide(0);
   renderMovies(movies);
