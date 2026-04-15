@@ -98,58 +98,65 @@ body{ padding-top:65px; }
 .left{ left:15px; }
 .right{ right:15px; }
 
-/* ================= TRENDING ================= */
+/* ================= MOVIES ================= */
 .section{
   padding:40px;
 }
 
 .stagger{
-  column-count:4;
-  column-gap:30px;
+  column-count:5;
+  column-gap:18px;
 }
 
+/* 🔥 SMALL MOVIE CARD */
 .card{
   display:inline-block;
   width:100%;
-  margin-bottom:30px;
+  margin-bottom:18px;
 
   background:rgba(255,255,255,0.08);
   backdrop-filter:blur(18px);
-  border-radius:16px;
+  -webkit-backdrop-filter:blur(18px);
+
+  border-radius:14px;
   overflow:hidden;
 
+  transform:scale(0.95);
   transition:0.25s ease;
 }
 
 .card:hover{
-  transform:scale(1.04);
+  transform:scale(1.0);
 }
 
 .card img{
   width:100%;
-  display:block;
+  height:160px;
+  object-fit:cover;
 }
 
 .card-body{
-  padding:12px;
+  padding:8px;
 }
 
 .card-body h4{
   margin:0;
+  font-size:13px;
   color:#DA4848;
 }
 
 .card-body p{
-  font-size:13px;
-  opacity:0.9;
+  font-size:11px;
+  opacity:0.85;
 }
 
 /* RESPONSIVE */
-@media(max-width:1200px){ .stagger{column-count:3;} }
-@media(max-width:800px){ .stagger{column-count:2;} }
-@media(max-width:500px){ .stagger{column-count:1;} }
+@media(max-width:1200px){ .stagger{column-count:4;} }
+@media(max-width:900px){ .stagger{column-count:3;} }
+@media(max-width:600px){ .stagger{column-count:2;} }
+@media(max-width:400px){ .stagger{column-count:1;} }
 
-/* MOBILE BANNER */
+/* MOBILE HERO */
 @media (max-width:768px){
   .hero{ aspect-ratio:2/3; }
 
@@ -190,6 +197,7 @@ footer a:hover{
 </header>
 
 <div class="hero">
+
   <button class="arrow left" onclick="prevSlide()">❮</button>
   <button class="arrow right" onclick="nextSlide()">❯</button>
 
@@ -199,6 +207,7 @@ footer a:hover{
     <h1 id="heroTitle"></h1>
     <p id="heroDesc"></p>
   </div>
+
 </div>
 
 <div class="section">
@@ -206,9 +215,8 @@ footer a:hover{
   <div class="stagger" id="row"></div>
 </div>
 
-<!-- FOOTER -->
 <footer>
-  <p>Contact Us: 
+  <p>Contact Us:
     <a href="mailto:waiyanmin.wmcomics@gmail.com">
       waiyanmin.wmcomics@gmail.com
     </a>
